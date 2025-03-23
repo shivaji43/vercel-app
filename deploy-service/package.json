@@ -1,0 +1,17 @@
+{
+  "name": "deploy-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsc && node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "redis": "^4.7.0",
+    "typescript": "^5.8.2"
+  }
+}
