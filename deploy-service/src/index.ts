@@ -1,20 +1,25 @@
-import { commandOptions, createClient } from "redis";
-import { redisPOP } from "./utils/types";
-import { downloadS3Folder } from "./utils/aws";
+import { createClient, commandOptions } from "redis";
+import { downloadS3Folder } from "./aws";
 
 const subscriber = createClient();
 subscriber.connect();
 
-async function main (){
-    while(1){
-        const response : redisPOP = await subscriber.brPop(
-            commandOptions({isolated : true}),
+const publisher = createClient();
+publisher.connect();
+
+async function main() {
+    while(1) {
+        const res = await subscriber.brPop(
+            commandOptions({ isolated: true }),
             'build-queue',
             0
-        );
-        console.log(response)
-        const id = response.element;
+          );
+          console.log(res)
+        // @ts-ignore;
+        const id = res.element
+        
         await downloadS3Folder(`output/${id}`)
+        console.log("downloaded");
     }
 }
 main();
