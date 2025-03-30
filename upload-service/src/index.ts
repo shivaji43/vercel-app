@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 const PORT = 3000;
 
-//uploadFile("dist/package.json", "/home/shivaji-raut/github_projects/vercel-app/upload-service/package.json")
+
 
 app.post("/deploy",async (req , res)=>{
     const repoUrl = req.body.repoUrl;
